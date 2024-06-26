@@ -12,7 +12,7 @@
   "readme": "README.md",
   "storage": [
     {"name":"dinoClock.app.js","url":"app.js"},
-    {"name":"dinoClock.img","url":"icon.js","evaluate":true}
+    {"name":"dinoClock.img","url":"icon.js","evaluate":true},
 	{"name":"dinoClock.settings.js","url":"settings.js"}
    ]
 }
