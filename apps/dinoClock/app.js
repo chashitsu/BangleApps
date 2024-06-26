@@ -1,7 +1,10 @@
 const storage = require('Storage');
 const locale = require("locale");
 
-
+var settings = Object.assign({
+  // default values
+  showSteps: false,
+}, require('Storage').readJSON("dinoClock.json", true) || {});
 
 
 // add modifiied 4x5 numeric font
@@ -182,6 +185,13 @@ function draw() {
   g.setFont("4x5NumPretty",2);
   g.drawString(date,22,95);
 
+  if(settings.showSteps){
+    //Print today steps
+    g.clearRect(5,163,5+5*2*4+2*4,163+2*5);
+    var status = Bangle.getHealthStatus('day');
+    g.drawString(status.steps,5,163);
+  }
+
   g.clearRect(22,79,22+24,79+13);
   g.setFont("DoW");
   g.drawString(dow,22,79);
@@ -216,4 +226,3 @@ Bangle.setUI("clock");  // Show launcher when middle button pressed
 Bangle.loadWidgets();
 Bangle.drawWidgets();
 draw();
-
