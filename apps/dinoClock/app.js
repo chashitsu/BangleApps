@@ -1,6 +1,9 @@
 const storage = require('Storage');
 const locale = require("locale");
 
+const defaultSettings = {
+  showSteps    : false
+};
 const settings = Object.assign(defaultSettings, require('Storage').readJSON('dinoClock.json',1)||{});
 
 // add modifiied 4x5 numeric font
