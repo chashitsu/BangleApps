@@ -4,7 +4,7 @@
   "description": "Clock with dino from Chrome",
   "screenshots": [{"url":"screens/screen1.png"}],
   "icon": "app.png",
-  "version": "0.01",
+  "version": "0.02",
   "type": "clock",
   "tags": "clock, weather, dino, trex, chrome",
   "supports": ["BANGLEJS2"],
@@ -13,5 +13,6 @@
   "storage": [
     {"name":"dinoClock.app.js","url":"app.js"},
     {"name":"dinoClock.img","url":"icon.js","evaluate":true}
+	{"name":"dinoClock.settings.js","url":"settings.js"}
    ]
 }
