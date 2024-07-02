@@ -2,9 +2,50 @@ const storage = require('Storage');
 const locale = require("locale");
 
 const defaultSettings = {
-  showSteps    : false
+  showSteps    : false,
+  enableTorch  : false
 };
+
 const settings = Object.assign(defaultSettings, require('Storage').readJSON('dinoClock.json',1)||{});
+
+// draw torch icon to right bottom 
+var torchState = 0;
+function showTorch(){
+  var torch = require("heatshrink").decompress(atob("icSgP/v/79//nv/+fn/9w//8h//gP4oE/+EH/0Av/Aof+gk//kD//AAgMHAgIaBj//4g"));
+  g.setColor(1,1,1);
+  g.setBgColor(0,0,0);
+  g.drawImage(torch,154,154);
+}
+// remove torch icon
+function removeTorch(){
+  g.setBgColor(1,1,1);
+  g.clearRect(154,154,154+21,154+21);
+}
+// when screen is touched, switch between torch / normal / lights off modes
+Bangle.on('touch', function(zone,e) {
+  if(!settings.enableTorch){ return; }
+  torchState = (torchState%3)+1;
+  switch(torchState)
+  {
+    case 1:
+      Bangle.setLCDBrightness(0.0);
+      Bangle.setLCDTimeout(10);
+      removeTorch();
+      break;
+    case 3:
+      Bangle.setLCDBrightness(0.1);
+      Bangle.setLCDTimeout(10);
+      removeTorch();
+      break;
+    case 2:
+      Bangle.setLCDBrightness(1);
+      Bangle.setLCDTimeout(undefined);
+      showTorch();
+      break;
+    default:
+      break;
+  }
+});
 
 // add modifiied 4x5 numeric font
 (function(graphics) {
@@ -143,6 +184,10 @@ function square(x,y,w,e) {
   g.setColor("#000").fillRect(x,y,x+w,y+w);
   g.setColor("#fff").fillRect(x+e,y+e,x+w-e,y+w-e);
 }
+
+
+
+
 
 function draw() {
   var d = new Date();

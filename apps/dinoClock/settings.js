@@ -1,6 +1,7 @@
 (function(back) {
   const defaultSettings = {
-    showSteps    : false
+    showSteps    : false,
+	enableTorch	 : false
   }
   let settings = Object.assign(defaultSettings, require('Storage').readJSON('dinoClock.json',1)||{});
   
@@ -15,6 +16,10 @@
     /*LANG*/'Show steps': {
       value:  !!settings.showSteps,
       onchange: x => save('showSteps', x),
+    },
+   /*LANG*/'Enable torch': {
+      value:  !!settings.enableTorch,
+      onchange: x => save('enableTorch', x),
     },
   };
   E.showMenu(menu);
